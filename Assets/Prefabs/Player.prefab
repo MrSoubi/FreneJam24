@@ -289,9 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a5f20af15545e4f8d0ad90fdbe974d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnJump:
-    m_PersistentCalls:
-      m_Calls: []
   rb: {fileID: 6971067388428645148}
   movementSpeed: 5
   jumpForce: 5
@@ -337,6 +334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d6b633e4914c345b174e3194407d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commandRecorder: {fileID: 6368982173638859472}
   desiredJump: 0
   movementDirection: {x: 0, y: 0, z: 0}
-  controller: {fileID: 6699312318706326841}

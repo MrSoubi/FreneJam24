@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerGhostController : MonoBehaviour
 {
+    [SerializeField] LifeManager lifeManager;
+
+    public List<MovementCommand> commands;
+    int commandIndex = 0;
+
     [SerializeField] Rigidbody rb;
     [SerializeField] float movementSpeed = 2, jumpForce = 10, groundDetectionDistance = 0.1f;
     [SerializeField] Vector3 groundDetectionOffset;
@@ -13,10 +18,27 @@ public class PlayerGhostController : MonoBehaviour
 
     Vector3 movementDirection = Vector3.zero;
 
+    private void Start()
+    {
+        commandIndex = 0;
+    }
+
     private void Update()
     {
-        desiredJump |= Input.GetKey(KeyCode.Space);
-        movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
+        if (commandIndex < commands.Count)
+        {
+            desiredJump |= commands[commandIndex].desiredJump;
+            movementDirection = commands[commandIndex].movementDirection;
+
+            Debug.Log(desiredJump + ", " +  movementDirection); 
+        }
+        else
+        {
+            desiredJump = false;
+            movementDirection = Vector3.zero;
+        }
+
+        commandIndex++;
     }
 
     private void FixedUpdate()
@@ -46,4 +68,6 @@ public class PlayerGhostController : MonoBehaviour
         }
         return false;
     }
+
+
 }

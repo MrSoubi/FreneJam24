@@ -21,6 +21,7 @@ public class CommandRecorder : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public struct MovementCommand
 {
     public Vector3 movementDirection;

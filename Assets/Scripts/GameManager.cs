@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    List<List<MovementCommand>> movementCommandsList;
+    List<List<MovementCommand>> movementCommandsList = new List<List<MovementCommand>>();
 
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject ghostPlayerPrefab;
@@ -66,7 +66,10 @@ public class GameManager : MonoBehaviour
     {
         foreach (var movementCommands in movementCommandsList)
         {
-            GameObject currentGhostPlayer = Instantiate(ghostPlayerPrefab, playerSpawn.position, Quaternion.identity);-
+            GameObject currentGhostPlayer = Instantiate(ghostPlayerPrefab, playerSpawn.position, Quaternion.identity);
+            currentGhostPlayer.GetComponent<PlayerGhostController>().commands = movementCommands;
+            currentGhostPlayer.GetComponent<LifeManager>().OnDeath.AddListener(() => Destroy(currentGhostPlayer));
+            entities.Add(currentGhostPlayer);
         }
     }
 

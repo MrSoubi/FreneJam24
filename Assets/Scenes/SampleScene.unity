@@ -469,6 +469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4329611475733878259, guid: d5d6eb6086ca1104281d19e196965ab0,
     type: 3}
+  ghostPlayerPrefab: {fileID: 1401867494541143471, guid: ac0bf810ef46f6e41ab45186881609e6,
+    type: 3}
   monsterPrefab: {fileID: 8207368958699571626, guid: 962eb591c3aec5845b5e12860100d445,
     type: 3}
   playerSpawn: {fileID: 2445619808114196042}
@@ -556,6 +558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414792998881521852, guid: 2340698d4fa24c849b51b35008c637fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -663,6 +670,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 672242211856616901, guid: 8fdf4bcb24f5fa04687027208347d047,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4997681765458417538, guid: 8fdf4bcb24f5fa04687027208347d047,
         type: 3}
