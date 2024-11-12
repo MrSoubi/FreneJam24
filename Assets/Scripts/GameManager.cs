@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var movementCommands in movementCommandsList)
         {
-            GameObject currentGhostPlayer = Instantiate(ghostPlayerPrefab, playerSpawn.position, Quaternion.identity);
+            GameObject currentGhostPlayer = Instantiate(ghostPlayerPrefab, playerSpawn.position, Quaternion.identity);-
         }
     }
 
