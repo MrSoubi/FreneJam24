@@ -1,12 +1,13 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MonsterBehaviour : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    [SerializeField] GameObject target;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] DetectionZone attackTrigger;
     [SerializeField] DetectionZone detectionTrigger;
@@ -19,12 +20,16 @@ public class MonsterBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if (target == null)
         {
+            if (detectionTrigger.GetObjectsInArea().Count > 0)
+            {
+                target = detectionTrigger.GetObjectsInArea()[0];
+            }
             return;
         }
 
-        agent.SetDestination(player.transform.position);
+        agent.SetDestination(target.transform.position);
     }
 
     void Attack(GameObject target)
@@ -41,7 +46,7 @@ public class MonsterBehaviour : MonoBehaviour
     {
         if (target.CompareTag("Player"))
         {
-            player = target;
+            this.target = target;
         }
     }
 }

@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     List<List<MovementCommand>> movementCommandsList = new List<List<MovementCommand>>();
 
+    [SerializeField] int nextLevelIndex;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject ghostPlayerPrefab;
     [SerializeField] GameObject monsterPrefab;
     [SerializeField] Transform playerSpawn;
-    [SerializeField] Transform monsterSpawn;
+    [SerializeField] List<Transform> monsterSpawns;
     [SerializeField] GoalBehaviour goal;
 
     CommandRecorder commandRecorder;
@@ -48,8 +50,11 @@ public class GameManager : MonoBehaviour
 
     void SpawnMonster()
     {
-        GameObject currentMonster = Instantiate(monsterPrefab, monsterSpawn.position, Quaternion.identity);
-        entities.Add(currentMonster);
+        foreach (Transform monsterSpawn in monsterSpawns)
+        {
+            GameObject currentMonster = Instantiate(monsterPrefab, monsterSpawn.position, Quaternion.identity);
+            entities.Add(currentMonster);
+        }
     }
 
     void SpawnPlayer()
@@ -75,6 +80,6 @@ public class GameManager : MonoBehaviour
 
     void OnGoalReached()
     {
-        Debug.Log("Win");
+        SceneManager.LoadScene(nextLevelIndex);
     }
 }
