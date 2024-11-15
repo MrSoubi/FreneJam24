@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] List<MovingPlatformBehaviour> movingPlatforms;
+
     List<List<MovementCommand>> movementCommandsList = new List<List<MovementCommand>>();
 
     [SerializeField] int nextLevelIndex;
@@ -13,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject monsterPrefab;
     [SerializeField] Transform playerSpawn;
     [SerializeField] List<Transform> monsterSpawns;
+    [SerializeField] List<DeathZoneBehaviour> deathZones;
     [SerializeField] GoalBehaviour goal;
 
     CommandRecorder commandRecorder;
@@ -24,14 +29,28 @@ public class GameManager : MonoBehaviour
     {
         goal.OnActivation.AddListener(OnGoalReached);
 
+        foreach(DeathZoneBehaviour zoneBehaviour in deathZones)
+        {
+            zoneBehaviour.OnPlayerEnteredDeathZone.AddListener(RetryRound);
+        }
+
         BeginRound();
     }
 
     void BeginRound()
     {
+        ResetPlatforms();
         SpawnMonster();
         SpawnPlayerClones();
         SpawnPlayer();
+    }
+
+    private void ResetPlatforms()
+    {
+        foreach (MovingPlatformBehaviour platform in movingPlatforms)
+        {
+            platform.Reset();
+        }
     }
 
     void RetryRound()

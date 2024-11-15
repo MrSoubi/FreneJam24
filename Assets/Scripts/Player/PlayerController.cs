@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     bool desiredJump = false;
     bool isGrounded = false;
+    bool isOnStickySurface = false;
 
     Vector3 movementDirection = Vector3.zero;
 
@@ -44,8 +45,12 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position + groundDetectionOffset, Vector3.down, out hit, groundDetectionDistance))
         {
+            isOnStickySurface = hit.collider.gameObject.CompareTag("Sticky");
+            transform.parent = hit.transform;
             return true;
         }
+
+        transform.parent = null;
         return false;
     }
 }
